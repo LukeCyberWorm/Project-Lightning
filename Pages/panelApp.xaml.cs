@@ -21,7 +21,7 @@ using Project_Lightning.Windows;
 namespace Project_Lightning.Pages
 {
     /// <summary>
-    /// Lógica de interacción para panelUbisoft.xaml
+    /// Lógica de interação para panelUbisoft.xaml
     /// </summary>
     public partial class panelApp : Page
     {
@@ -32,9 +32,9 @@ namespace Project_Lightning.Pages
         {
             InitializeComponent();
             
-            //CAMBIO EL NOMBRE DE LA ETIQUETA
+            //ALTERA O NOME DO TEXTO
             txtApp.Text = nomApp;
-            //CAMBIO DE COLOR DE LA ETIQUETA
+            //ALTERA A COR DO TEXTO
             switch (nomApp)
             {
                 case "UBISOFT": txtApp.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6A0DAD ")); break;
@@ -46,7 +46,7 @@ namespace Project_Lightning.Pages
 
             }
 
-            //INICIALIZO LA VENTANA PARA TENER UNA REFERENCIA DE LA VENTANA PRINCIPAL Y LA VARIABLE DE TEXTO
+            //INICIALIZA A JANELA PARA TER UMA REFERÊNCIA DA JANELA PRINCIPAL E A VARIÁVEL DE TEXTO
             ventanaPrincipal = mainWindow;
             nombreApp = nomApp;
 
@@ -54,7 +54,7 @@ namespace Project_Lightning.Pages
 
         }
 
-        //CLASE JUEGO QUE CONTENDRA LA INFORMACIÓN DE CADA JUEGO
+        //CLASSE JOGO QUE CONTÉM AS INFORMAÇÕES DE CADA JOGO
         public class Juego
         {
             public string name { get; set; }
@@ -74,12 +74,12 @@ namespace Project_Lightning.Pages
 
             colocarBotones(juegosApp);
 
-            //descargarJuego(juegosApp.First());
+            //baixarJogo(juegosApp.First());
 
         }
 
 
-        //ESTE METODO BUSCA SACAR TODOS LOS JUEGOS DE UNA SOLA COMPAÑIA DADA POR EL nomApp
+        //ESTE MÉTODO BUSCA OBTER TODOS OS JOGOS DE UMA ÚNICA COMPANHIA DADA PELO nomApp
         private async Task<Dictionary<string, Juego>> sacarJuegosDeApp(string nomApp)
         {
             string rutaJson = System.IO.Path.GetFullPath(@"..\\..\\data.json");
@@ -93,20 +93,20 @@ namespace Project_Lightning.Pages
                     using (HttpClient client = new HttpClient())
                     {
                         string contenidoGitHub = await client.GetStringAsync(urlJson);
-                        File.WriteAllText(rutaJson, contenidoGitHub); //ACTUALIZA ARCHIVO LOCAL
-                        File.WriteAllText(rutaJsonApp, contenidoGitHub); //ACTUALIZA ARCHIVO LOCAL
-                        //MessageBox.Show("Se ha actualizado el archivo data.json desde GitHub");
+                        File.WriteAllText(rutaJson, contenidoGitHub); //ATUALIZA ARQUIVO LOCAL
+                        File.WriteAllText(rutaJsonApp, contenidoGitHub); //ATUALIZA ARQUIVO LOCAL
+                        //MessageBox.Show("O arquivo data.json foi atualizado do GitHub");
                     }
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Error al actualizar data.json: " + ex.Message);
-                    var ventanaError = new Windows.ErrorDialog("Error updating the game list, please try again later: " + ex.Message, Brushes.Red);
+                    //MessageBox.Show("Erro ao atualizar data.json: " + ex.Message);
+                    var ventanaError = new Windows.ErrorDialog("Erro ao atualizar a lista de jogos, tente novamente mais tarde: " + ex.Message, Brushes.Red);
                     ventanaError.ShowDialog();
                 }
             }
 
-            //CARGAR LOCAL
+            //CARREGAR LOCALMENTE
             string json = File.ReadAllText(rutaJsonApp);
             var data = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Juego>>>(json);
 
@@ -128,7 +128,7 @@ namespace Project_Lightning.Pages
 
                     if (!File.Exists(rutaLocal))
                     {
-                        return true; //NO EXISTE EL LOCAL, ES DIFERENTE
+                        return true; //NÃO EXISTE LOCALMENTE, É DIFERENTE
                     }
 
                     string contenidoLocal = File.ReadAllText(rutaLocal);
@@ -137,23 +137,23 @@ namespace Project_Lightning.Pages
             }
             catch (Exception ex)
             {
-                var ventanaError = new ErrorDialog("Error comparing files: " + ex.Message, Brushes.Red);
+                var ventanaError = new ErrorDialog("Erro ao comparar arquivos: " + ex.Message, Brushes.Red);
                 ventanaError.Show();
-                //MessageBox.Show("Error al comparar archivos: " + ex.Message);
+                //MessageBox.Show("Erro ao comparar arquivos: " + ex.Message);
                 return false;
             }
         }
 
 
-        //ESTE METODO BUSCA CREAR TODOS LOS BOTONES, COLCOAR SU IMAGEN Y SU RESPECTIVO METODO DE CLICK
+        //ESTE MÉTODO BUSCA CRIAR TODOS OS BOTÕES, COLOCAR SUA IMAGEM E SEU RESPECTIVO MÉTODO DE CLIQUE
         private void colocarBotones(Dictionary<string, Juego> juegosApp)
         {
             if (juegosApp.Count != 0)
             {
-                //BUCLE PARA SACAR TODOS LOS JUEGOS
+                //LAÇO PARA OBTER TODOS OS JOGOS
                 foreach (var juego in juegosApp)
                 {
-                    //CREO LOS BOTONES DE CADA JUEGO Y LE ASIGNO EL TAMAÑO PREDEFINIDO
+                    //CRIA OS BOTÕES DE CADA JOGO E DEFINE O TAMANHO PADRÃO
                     Button botonJuego = new Button
                     {
                         Width = 198,
@@ -161,10 +161,10 @@ namespace Project_Lightning.Pages
                         Margin = new Thickness(17),
                     };
 
-                    //APLICO EL ESTILO QUE HE HECHO EN EL XAML
+                    //APLICA O ESTILO DEFINIDO NO XAML
                     botonJuego.Style = (Style)FindResource("Boton_juego");
 
-                    //CREO LA IMAGEN QUE IRA EN CADA BOTON
+                    //CRIA A IMAGEM QUE IRÁ EM CADA BOTÃO
                     Image imagenJuego = new Image
                     {
                         Width = 198,
@@ -178,15 +178,15 @@ namespace Project_Lightning.Pages
                         juego.Value.custom_images.TryGetValue("hero_image", out imagenPersonalizada) &&
                         !string.IsNullOrWhiteSpace(imagenPersonalizada))
                     {
-                        //SI HAY IMAGEN PERSONALIZADA, LA USO
+                        //SE HOUVER IMAGEM PERSONALIZADA, USA ELA
                         imagenJuego.Source = new BitmapImage(new Uri(imagenPersonalizada));
                     }
                     else
                     {
-                        //INTENTO CARGAR LA IMAGEN ORIGINAL DE STEAM
+                        //TENTA CARREGAR A IMAGEM ORIGINAL DO STEAM
                         imagenJuego.Source = new BitmapImage(new Uri("https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/" + juego.Key + "/library_600x900.jpg"));
 
-                        //SI FALLA LA CARGA, PONGO UNA IMAGEN DE RESPALDO
+                        //SE FALHAR O CARREGAMENTO, COLOCA UMA IMAGEM DE BACKUP
                         imagenJuego.ImageFailed += (sender, e) =>
                         {
                             imagenJuego.Stretch = Stretch.Uniform;
@@ -194,17 +194,17 @@ namespace Project_Lightning.Pages
                         };
                     }
 
-                    //AGREGO LA IMAGEN AL BOTON
+                    //ADICIONA A IMAGEM AO BOTÃO
                     botonJuego.Content = imagenJuego;
 
-                    //EVENTO CUANDO SE HACE CLICK EN UN BOTÓN
+                    //EVENTO QUANDO UM BOTÃO É CLICADO
                     botonJuego.Click += (sender, e) =>
                     {
 
                         ventanaPrincipal.framePrincipal.Navigate(new panelJuego(nombreApp, juego, this, ventanaPrincipal));
                     };
 
-                    //POR ÚLTIMO, LOS AGREGO AL PANEL DE JUEGOS
+                    //POR FIM, ADICIONA AO PAINEL DE JOGOS
                     panelJuegos.Children.Add(botonJuego);
                 }
             }
@@ -222,33 +222,33 @@ namespace Project_Lightning.Pages
                 //TEXTO NORMAL
                 textBlock.Inlines.Add(new Run
                 {
-                    Text = "THERE ARE NO GAMES ",
+                    Text = "NÃO HÁ JOGOS ",
                     Foreground = Brushes.White
                 });
 
-                //TEXTO PARA EL FOR NOW
+                //TEXTO PARA O FOR NOW
                 textBlock.Inlines.Add(new Run
                 {
-                    Text = "FOR NOW",
+                    Text = "POR ENQUANTO",
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6A0DAD"))
 
                 });
 
-                //TEXTO PARA EL EMOJI
+                //TEXTO PARA O EMOJI
                 textBlock.Inlines.Add(new Run
                 {
                     Text = "🚧",
                     Foreground = Brushes.Yellow
                 });
 
-                //CREO EL BINDING DEL ANCHO
+                //CRIA O BINDING DA LARGURA
                 Binding binding = new Binding("ActualWidth")
                 {
                     Source = panelJuegos
                 };
                 textBlock.SetBinding(FrameworkElement.WidthProperty, binding);
 
-                //CREO EL BORDER
+                //CRIA A BORDA
                 Border border = new Border
                 {
                     Background = Brushes.Transparent,
