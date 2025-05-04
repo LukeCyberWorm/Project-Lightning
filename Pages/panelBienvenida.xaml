@@ -12,7 +12,7 @@
         <FontFamily x:Key="FuenteJohn">pack://application:,,,/res/fonts/#Muro Regulat</FontFamily>
         <FontFamily x:Key="FuenteJohnInclinada">pack://application:,,,/res/fonts/#Muro Slant</FontFamily>
 
-        <!--ESTILO PARA LOS BOTONES-->
+        <!--ESTILO PARA OS BOTÕES-->
         <Style x:Key="MinimalButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="#6A0DAD"/>
@@ -40,17 +40,17 @@
                       VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!--EFECTO PARA CUANDO EL RATON ESTE ENCIMA-->
+                            <!--EFEITO PARA QUANDO O MOUSE ESTIVER SOBRE O BOTÃO-->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <!--ANIMACION DEL FONDO-->
+                                            <!--ANIMAÇÃO DO FUNDO-->
                                             <ColorAnimation 
                                         Storyboard.TargetName="border" 
                                         Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
                                         From="Transparent" To="#6A0DAD" Duration="0:0:0.3" AutoReverse="False"/>
-                                            <!--ANIMACION DEL BORDE
+                                            <!--ANIMAÇÃO DA BORDA
                             <ColorAnimation 
                                 Storyboard.TargetName="border" 
                                 Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" 
@@ -61,17 +61,17 @@
                                 </Trigger.EnterActions>
                             </Trigger>
 
-                            <!--EFECTO PARA CUANDO EL RATON SE VA-->
+                            <!--EFEITO PARA QUANDO O MOUSE SAIR DO BOTÃO-->
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <!--ANIMACION DEL FONDO-->
+                                            <!--ANIMAÇÃO DO FUNDO-->
                                             <ColorAnimation 
                                         Storyboard.TargetName="border" 
                                         Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
                                         From="#6A0DAD" To="Transparent" Duration="0:0:0.3" AutoReverse="False"/>
-                                            <!--ANIMACION DEL BORDE
+                                            <!--ANIMAÇÃO DA BORDA
                             <ColorAnimation 
                                 Storyboard.TargetName="border" 
                                 Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" 
@@ -82,7 +82,7 @@
                                 </Trigger.ExitActions>
                             </Trigger>
 
-                            <!--EFECTO PARA CUANDO SE PRESIONE EL BOTON-->
+                            <!--EFEITO PARA QUANDO O BOTÃO FOR PRESSIONADO-->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="BorderBrush" Value="White"/>
@@ -102,7 +102,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Welcome to" Foreground="White" FontSize="100" FontFamily="{StaticResource FuenteJohnInclinada}"
+        <TextBlock Text="Bem-vindo ao" Foreground="White" FontSize="100" FontFamily="{StaticResource FuenteJohnInclinada}"
                    Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
         <Image Source="/res/media/letters/Project-Lightning-font2.png" Grid.Row="1" Height="170" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -113,10 +113,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Select an app to get started" Foreground="White" FontSize="30" FontFamily="{StaticResource FuenteJohnInclinada}"
+            <TextBlock Text="Selecione um aplicativo para começar" Foreground="White" FontSize="30" FontFamily="{StaticResource FuenteJohnInclinada}"
                        Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            <!--GRID PARA LOS BOTONES DE LEGAL, ULTIMA ACTUALIZACION, ETC-->
+            <!--GRID PARA OS BOTÕES DE GUIA RÁPIDO, ÚLTIMA ATUALIZAÇÃO, ETC-->
             <Grid Grid.Row="1" Width="600">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -125,11 +125,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Width="150" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Content="Quick Guide" Style="{StaticResource MinimalButtonStyle}" Click="quickGuideButtonClick"/>
+                        Content="Guia Rápido" Style="{StaticResource MinimalButtonStyle}" Click="quickGuideButtonClick"/>
                 <Button Grid.Column="1" Width="150" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Content="Changelog" Style="{StaticResource MinimalButtonStyle}" Click="changeLogButtonClick"/>
+                        Content="Registro de Alterações" Style="{StaticResource MinimalButtonStyle}" Click="changeLogButtonClick"/>
                 <Button Grid.Column="2" Width="150" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Content="Legal Notice" Style="{StaticResource MinimalButtonStyle}" Click="legalButtonClick"/>
+                        Content="Aviso Legal" Style="{StaticResource MinimalButtonStyle}" Click="legalButtonClick"/>
 
 
             </Grid>
